@@ -15,7 +15,8 @@
 	"jsnext:main": "build/index.es.js",
 	"scripts": {
 		"build": "rollup -c",
-		"storybook": "start-storybook"
+		"storybook": "start-storybook",
+		"prepare": "npm run build"
 	},
 	"dependencies": {
 		"@material-ui/core": "^4.9.5",
