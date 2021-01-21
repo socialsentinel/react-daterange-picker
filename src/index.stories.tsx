@@ -11,7 +11,10 @@ export const justDateRange = () => <DateRangePicker open={true} onChange={() => 
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#EF6915', dark: '#D97709' },
+    primary: {
+      main: '#f9894b',
+      dark: '#D97709'
+    },
   },
 });
 
@@ -63,7 +66,7 @@ const getDefaultRanges = (date: Date): DefinedRange[] => [
 
 export const withTranslation = () => {
   return (
-    <DateRangePicker open={true} onChange={() => { }} 
+    <DateRangePicker open={true} onChange={() => { }}
       translation={{
         endDate: "Data Final",
         startDate: "Data Inicial",

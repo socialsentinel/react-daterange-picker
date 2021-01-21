@@ -34,7 +34,6 @@ interface DateRangePickerProps {
 	definedRanges?: DefinedRange[];
 	minDate?: Date | string;
 	maxDate?: Date | string;
-	filledClassname?: string;
 	onChange: (dateRange: DateRange) => void;
 	translation?: React.ComponentPropsWithoutRef<typeof Menu>['translation'];
 }
@@ -48,11 +47,10 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		initialDateRange,
 		minDate,
 		maxDate,
-		filledClassname,
 		definedRanges = defaultRanges,
 		translation,
 	} = props;
-console.log(filledClassname)
+
 	const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
 	const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
 	const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
@@ -149,7 +147,6 @@ console.log(filledClassname)
 			dateRange={dateRange}
 			minDate={minDateValid}
 			maxDate={maxDateValid}
-			filledClassname={filledClassname}
 			ranges={definedRanges}
 			firstMonth={firstMonth}
 			secondMonth={secondMonth}

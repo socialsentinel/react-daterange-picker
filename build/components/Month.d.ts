@@ -20,7 +20,6 @@ interface MonthProps extends WithStyles<typeof styles> {
     };
     weekDays?: [string, string, string, string, string, string, string];
     months?: [string, string, string, string, string, string, string, string, string, string, string, string];
-    filledClassname?: string;
 }
-declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MonthProps>, "marker" | "value" | "dateRange" | "minDate" | "maxDate" | "navState" | "setValue" | "helpers" | "handlers" | "weekDays" | "months" | "filledClassname" | "children"> & import("@material-ui/core").StyledComponentProps<"root" | "weekDaysContainer" | "daysContainer">>;
+declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MonthProps>, "marker" | "value" | "dateRange" | "minDate" | "maxDate" | "navState" | "setValue" | "helpers" | "handlers" | "weekDays" | "months" | "children"> & import("@material-ui/core").StyledComponentProps<"root" | "weekDaysContainer" | "daysContainer">>;
 export default _default;

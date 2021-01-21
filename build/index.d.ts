@@ -7,7 +7,6 @@ interface DateRangePickerProps {
     definedRanges?: DefinedRange[];
     minDate?: Date | string;
     maxDate?: Date | string;
-    filledClassname?: string;
     onChange: (dateRange: DateRange) => void;
     translation?: React.ComponentPropsWithoutRef<typeof Menu>['translation'];
 }

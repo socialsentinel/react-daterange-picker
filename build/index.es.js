@@ -3444,27 +3444,27 @@ var useStyles = makeStyles(function (theme) {
             lineHeight: 1.6
         },
         outlined: {
-            border: "1px solid " + theme.palette.primary.dark
+            border: "1px solid " + theme.palette.primary.main
         },
         filled: {
             "&:hover": {
-                backgroundColor: theme.palette.primary.dark
+                backgroundColor: theme.palette.primary.main
             },
-            backgroundColor: theme.palette.primary.dark
+            backgroundColor: theme.palette.primary.main,
+            border: "1px solid " + theme.palette.primary.main
         },
         highlighted: {
             backgroundColor: theme.palette.action.hover
         },
         contrast: {
-            color: theme.palette.primary.contrastText
+            color: theme.palette.common.white
         }
     });
 });
 var Day = function (props) {
-    console.log(props.filledClassname);
     var classes = useStyles();
     return (createElement("div", { className: combine(classes.buttonContainer, props.startOfRange && classes.leftBorderRadius, props.endOfRange && classes.rightBorderRadius, !props.disabled && props.highlighted && classes.highlighted) },
-        createElement(IconButton, { className: combine(classes.button, !props.disabled && props.outlined && classes.outlined, !props.disabled && props.filled && (props.filledClassname || classes.filled)), disabled: props.disabled, onClick: props.onClick, onMouseOver: props.onHover },
+        createElement(IconButton, { className: combine(classes.button, !props.disabled && props.outlined && classes.outlined, !props.disabled && props.filled && classes.filled), disabled: props.disabled, onClick: props.onClick, onMouseOver: props.onHover },
             createElement(Typography, { className: combine(classes.buttonText, !props.disabled && props.filled && classes.contrast), variant: "body2" }, props.value))));
 };
 
@@ -3494,7 +3494,7 @@ var styles$1 = function (_) {
     });
 };
 var Month = function (props) {
-    var classes = props.classes, helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate, _a = props.weekDays, weekDays = _a === void 0 ? WEEK_DAYS : _a, months = props.months, filledClassname = props.filledClassname;
+    var classes = props.classes, helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate, _a = props.weekDays, weekDays = _a === void 0 ? WEEK_DAYS : _a, months = props.months;
     var _b = props.navState, back = _b[0], forward = _b[1];
     return (createElement(Paper, { square: true, elevation: 0, className: classes.root },
         createElement(Grid, { container: true },
@@ -3508,7 +3508,7 @@ var Month = function (props) {
                 var isRangeOneDay = isRangeSameDay(dateRange);
                 var highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
                 return (createElement(Day, { key: format(day, "MM-dd-yyyy"), filled: isStart || isEnd, outlined: isToday(day), highlighted: highlighted && !isRangeOneDay, disabled: !isSameMonth(date, day) ||
-                        !isWithinInterval(day, { start: minDate, end: maxDate }), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: getDate(day), filledClassname: filledClassname }));
+                        !isWithinInterval(day, { start: minDate, end: maxDate }), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: getDate(day) }));
             }))); })))));
 };
 var Month$1 = withStyles$1(styles$1)(Month);
@@ -3554,14 +3554,14 @@ var styles$2 = function (theme) {
     });
 };
 var Menu = function (props) {
-    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation, filledClassname = props.filledClassname;
+    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation;
     var translationText = __assign({
         startDate: "Start Date",
         endDate: "End Date"
     }, translation);
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     var canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
-    var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers, filledClassname: filledClassname };
+    var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers };
     console.log(commonProps);
     return (React__default.createElement(Paper, { elevation: 5, square: true },
         React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
@@ -3636,8 +3636,7 @@ var getValidatedMonths = function (range, minDate, maxDate) {
 };
 var DateRangePickerImpl = function (props) {
     var today = new Date();
-    var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, filledClassname = props.filledClassname, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
-    console.log(filledClassname);
+    var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
     var minDateValid = parseOptionalDate(minDate, addYears(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];
@@ -3715,7 +3714,7 @@ var DateRangePickerImpl = function (props) {
         onDayHover: onDayHover,
         onMonthNavigate: onMonthNavigate
     };
-    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, filledClassname: filledClassname, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation })) : null;
+    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation })) : null;
 };
 var DateRangePicker = DateRangePickerImpl;
 

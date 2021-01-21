@@ -1,7 +1,6 @@
 /// <reference types="react" />
 interface DayProps {
     filled?: boolean;
-    filledClassname?: string;
     outlined?: boolean;
     highlighted?: boolean;
     disabled?: boolean;

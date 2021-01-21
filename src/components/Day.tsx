@@ -5,7 +5,6 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 
 interface DayProps {
   filled?: boolean;
-  filledClassname?: string;
   outlined?: boolean;
   highlighted?: boolean;
   disabled?: boolean;
@@ -36,25 +35,25 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: 1.6
     },
     outlined: {
-      border: `1px solid ${theme.palette.primary.dark}`
+      border: `1px solid ${theme.palette.primary.main}`
     },
     filled: {
       "&:hover": {
-        backgroundColor: theme.palette.primary.dark
+        backgroundColor: theme.palette.primary.main
       },
-      backgroundColor: theme.palette.primary.dark
+      backgroundColor: theme.palette.primary.main,
+      border: `1px solid ${theme.palette.primary.main}`
     },
     highlighted: {
       backgroundColor: theme.palette.action.hover
     },
     contrast: {
-      color: theme.palette.primary.contrastText
+      color: theme.palette.common.white
     }
   })
 )
 
 const Day = (props: DayProps) => {
-  console.log(props.filledClassname)
   const classes = useStyles();
   return (
     <div
@@ -68,7 +67,7 @@ const Day = (props: DayProps) => {
         className={combine(
           classes.button,
           !props.disabled && props.outlined && classes.outlined,
-          !props.disabled && props.filled && (props.filledClassname || classes.filled)
+          !props.disabled && props.filled && classes.filled
         )}
         disabled={props.disabled}
         onClick={props.onClick}

@@ -27,7 +27,6 @@ interface MenuProps extends WithStyles<typeof styles> {
         weekDays?: [string, string, string, string, string, string, string];
         locale?: object;
     };
-    filledClassname?: string;
 }
-declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MenuProps>, "dateRange" | "ranges" | "minDate" | "maxDate" | "firstMonth" | "secondMonth" | "setFirstMonth" | "setSecondMonth" | "setDateRange" | "helpers" | "handlers" | "translation" | "filledClassname" | "children"> & import("@material-ui/core").StyledComponentProps<"header" | "headerItem" | "divider">>;
+declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MenuProps>, "dateRange" | "ranges" | "minDate" | "maxDate" | "firstMonth" | "secondMonth" | "setFirstMonth" | "setSecondMonth" | "setDateRange" | "helpers" | "handlers" | "translation" | "children"> & import("@material-ui/core").StyledComponentProps<"header" | "headerItem" | "divider">>;
 export default _default;
