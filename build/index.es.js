@@ -3637,6 +3637,7 @@ var getValidatedMonths = function (range, minDate, maxDate) {
 var DateRangePickerImpl = function (props) {
     var today = new Date();
     var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, filledClassname = props.filledClassname, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
+    console.log(filledClassname);
     var minDateValid = parseOptionalDate(minDate, addYears(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];

@@ -52,7 +52,7 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		definedRanges = defaultRanges,
 		translation,
 	} = props;
-
+console.log(filledClassname)
 	const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
 	const maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
 	const [intialFirstMonth, initialSecondMonth] = getValidatedMonths(
