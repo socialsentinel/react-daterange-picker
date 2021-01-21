@@ -12,9 +12,12 @@ export const justDateRange = () => <DateRangePicker open={true} onChange={() => 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#f9894b',
+      main: '#20c085',
       dark: '#D97709'
     },
+    secondary: {
+      main: '#f9894b'
+    }
   },
 });
 

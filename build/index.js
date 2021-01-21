@@ -3451,14 +3451,14 @@ var useStyles = styles$3.makeStyles(function (theme) {
             lineHeight: 1.6
         },
         outlined: {
-            border: "1px solid " + theme.palette.primary.main
+            border: "1px solid " + theme.palette.secondary.main
         },
         filled: {
             "&:hover": {
-                backgroundColor: theme.palette.primary.main
+                backgroundColor: theme.palette.secondary.main
             },
-            backgroundColor: theme.palette.primary.main,
-            border: "1px solid " + theme.palette.primary.main
+            backgroundColor: theme.palette.secondary.main,
+            border: "1px solid " + theme.palette.secondary.main
         },
         highlighted: {
             backgroundColor: theme.palette.action.hover
