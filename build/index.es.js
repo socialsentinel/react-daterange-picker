@@ -3461,6 +3461,7 @@ var useStyles = makeStyles(function (theme) {
     });
 });
 var Day = function (props) {
+    console.log(props.filledClassname);
     var classes = useStyles();
     return (createElement("div", { className: combine(classes.buttonContainer, props.startOfRange && classes.leftBorderRadius, props.endOfRange && classes.rightBorderRadius, !props.disabled && props.highlighted && classes.highlighted) },
         createElement(IconButton, { className: combine(classes.button, !props.disabled && props.outlined && classes.outlined, !props.disabled && props.filled && (props.filledClassname || classes.filled)), disabled: props.disabled, onClick: props.onClick, onMouseOver: props.onHover },
@@ -3561,6 +3562,7 @@ var Menu = function (props) {
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     var canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
     var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers, filledClassname: filledClassname };
+    console.log(commonProps);
     return (React__default.createElement(Paper, { elevation: 5, square: true },
         React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
             React__default.createElement(Grid, null,

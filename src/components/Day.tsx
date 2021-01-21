@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const Day = (props: DayProps) => {
+  console.log(props.filledClassname)
   const classes = useStyles();
   return (
     <div

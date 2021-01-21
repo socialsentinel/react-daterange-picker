@@ -89,6 +89,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers, filledClassname };
+  console.log(commonProps)
   return (
     <Paper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
