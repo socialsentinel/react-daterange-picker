@@ -3384,7 +3384,9 @@ var styles = styles$3.createStyles({
         }
     },
     input: {
-        borderBottom: "1px solid transparent"
+        "&:before": {
+            borderBottom: "1px solid transparent"
+        }
     }
 });
 var MONTHS = [
@@ -3420,9 +3422,9 @@ var Header = function (_a) {
             React__default.createElement(core.IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
                 React__default.createElement(ChevronLeft, { color: prevDisabled ? "disabled" : "action" }))),
         React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: getMonth(date), onChange: handleMonthChange, inputProps: { classes: { underline: classes.input } }, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
+            React__default.createElement(core.Select, { value: getMonth(date), onChange: handleMonthChange, className: classes.input, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
         React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, inputProps: { classes: { underline: classes.input } }, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
+            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
         React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(core.IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
                 React__default.createElement(ChevronRight, { color: nextDisabled ? "disabled" : "action" })))));
