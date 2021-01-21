@@ -29,6 +29,9 @@ const styles = createStyles({
 		"&:hover": {
 			background: "none"
 		}
+	},
+	input: {
+		borderBottom: "1px solid transparent"
 	}
 });
 
@@ -86,6 +89,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 				<Select
 					value={getMonth(date)}
 					onChange={handleMonthChange}
+					inputProps={{classes: {underline: classes.input}}}
 					MenuProps={{ disablePortal: true }}>
 					{months.map((month, idx) => (
 						<MenuItem key={month} value={idx}>
@@ -99,6 +103,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 				<Select
 					value={getYear(date)}
 					onChange={handleYearChange}
+					inputProps={{classes: {underline: classes.input}}}
 					MenuProps={{ disablePortal: true }}>
 					{generateYears(date, 30).map(year => (
 						<MenuItem key={year} value={year}>

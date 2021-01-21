@@ -5,6 +5,7 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 
 interface DayProps {
   filled?: boolean;
+  filledClassname?: string;
   outlined?: boolean;
   highlighted?: boolean;
   disabled?: boolean;
@@ -66,7 +67,7 @@ const Day = (props: DayProps) => {
         className={combine(
           classes.button,
           !props.disabled && props.outlined && classes.outlined,
-          !props.disabled && props.filled && classes.filled
+          !props.disabled && props.filled && (props.filledClassname || classes.filled)
         )}
         disabled={props.disabled}
         onClick={props.onClick}

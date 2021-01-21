@@ -7,4 +7,6 @@ export declare const isStartOfRange: ({ startDate }: DateRange, day: Date) => bo
 export declare const isEndOfRange: ({ endDate }: DateRange, day: Date) => boolean;
 export declare const inDateRange: ({ startDate, endDate }: DateRange, day: Date) => boolean;
 export declare const isRangeSameDay: ({ startDate, endDate }: DateRange) => boolean;
-export declare const parseOptionalDate: (date: string | false | 0 | Date | null | undefined, defaultValue: Date) => Date;
+declare type Falsy = false | null | undefined | 0 | "";
+export declare const parseOptionalDate: (date: Date | string | Falsy, defaultValue: Date) => Date;
+export {};

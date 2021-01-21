@@ -59,6 +59,7 @@ interface MonthProps extends WithStyles<typeof styles> {
 	};
 	weekDays?: [string, string, string, string, string, string, string];
 	months?: [string, string, string, string, string, string, string, string, string, string, string, string];
+	filledClassname?: string;
 }
 
 const Month: React.FunctionComponent<MonthProps> = props => {
@@ -74,6 +75,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 		maxDate,
 		weekDays = WEEK_DAYS,
 		months,
+		filledClassname
 	} = props;
 
 	const [back, forward] = props.navState;
@@ -135,6 +137,7 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 										onClick={() => handlers.onDayClick(day)}
 										onHover={() => handlers.onDayHover(day)}
 										value={getDate(day)}
+										filledClassname={filledClassname}
 									/>
 								);
 							})}

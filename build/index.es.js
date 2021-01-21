@@ -1,5 +1,6 @@
 import React__default, { createElement, useState } from 'react';
-import { createStyles, withStyles, Grid, IconButton, Select, MenuItem, makeStyles, Typography, Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
+import { Grid, IconButton, Select, MenuItem, Typography, withStyles as withStyles$1, createStyles as createStyles$1, Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
+import { createStyles, withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
@@ -3374,6 +3375,9 @@ var styles = createStyles({
         "&:hover": {
             background: "none"
         }
+    },
+    input: {
+        borderBottom: "1px solid transparent"
     }
 });
 var MONTHS = [
@@ -3409,9 +3413,9 @@ var Header = function (_a) {
             React__default.createElement(IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
                 React__default.createElement(ChevronLeft, { color: prevDisabled ? "disabled" : "action" }))),
         React__default.createElement(Grid, { item: true },
-            React__default.createElement(Select, { value: getMonth(date), onChange: handleMonthChange, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(MenuItem, { key: month, value: idx }, month)); }))),
+            React__default.createElement(Select, { value: getMonth(date), onChange: handleMonthChange, inputProps: { classes: { underline: classes.input } }, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(MenuItem, { key: month, value: idx }, month)); }))),
         React__default.createElement(Grid, { item: true },
-            React__default.createElement(Select, { value: getYear(date), onChange: handleYearChange, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(MenuItem, { key: year, value: year }, year)); }))),
+            React__default.createElement(Select, { value: getYear(date), onChange: handleYearChange, inputProps: { classes: { underline: classes.input } }, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(MenuItem, { key: year, value: year }, year)); }))),
         React__default.createElement(Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
                 React__default.createElement(ChevronRight, { color: nextDisabled ? "disabled" : "action" })))));
@@ -3457,7 +3461,7 @@ var useStyles = makeStyles(function (theme) {
 var Day = function (props) {
     var classes = useStyles();
     return (createElement("div", { className: combine(classes.buttonContainer, props.startOfRange && classes.leftBorderRadius, props.endOfRange && classes.rightBorderRadius, !props.disabled && props.highlighted && classes.highlighted) },
-        createElement(IconButton, { className: combine(classes.button, !props.disabled && props.outlined && classes.outlined, !props.disabled && props.filled && classes.filled), disabled: props.disabled, onClick: props.onClick, onMouseOver: props.onHover },
+        createElement(IconButton, { className: combine(classes.button, !props.disabled && props.outlined && classes.outlined, !props.disabled && props.filled && (props.filledClassname || classes.filled)), disabled: props.disabled, onClick: props.onClick, onMouseOver: props.onHover },
             createElement(Typography, { className: combine(classes.buttonText, !props.disabled && props.filled && classes.contrast), variant: "body2" }, props.value))));
 };
 
@@ -3469,7 +3473,7 @@ var NavigationAction;
 
 var WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 var styles$1 = function (_) {
-    return createStyles({
+    return createStyles$1({
         root: {
             width: 290
         },
@@ -3487,7 +3491,7 @@ var styles$1 = function (_) {
     });
 };
 var Month = function (props) {
-    var classes = props.classes, helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate, _a = props.weekDays, weekDays = _a === void 0 ? WEEK_DAYS : _a, months = props.months;
+    var classes = props.classes, helpers = props.helpers, handlers = props.handlers, date = props.value, dateRange = props.dateRange, marker = props.marker, setDate = props.setValue, minDate = props.minDate, maxDate = props.maxDate, _a = props.weekDays, weekDays = _a === void 0 ? WEEK_DAYS : _a, months = props.months, filledClassname = props.filledClassname;
     var _b = props.navState, back = _b[0], forward = _b[1];
     return (createElement(Paper, { square: true, elevation: 0, className: classes.root },
         createElement(Grid, { container: true },
@@ -3501,10 +3505,10 @@ var Month = function (props) {
                 var isRangeOneDay = isRangeSameDay(dateRange);
                 var highlighted = inDateRange(dateRange, day) || helpers.inHoverRange(day);
                 return (createElement(Day, { key: format(day, "MM-dd-yyyy"), filled: isStart || isEnd, outlined: isToday(day), highlighted: highlighted && !isRangeOneDay, disabled: !isSameMonth(date, day) ||
-                        !isWithinInterval(day, { start: minDate, end: maxDate }), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: getDate(day) }));
+                        !isWithinInterval(day, { start: minDate, end: maxDate }), startOfRange: isStart && !isRangeOneDay, endOfRange: isEnd && !isRangeOneDay, onClick: function () { return handlers.onDayClick(day); }, onHover: function () { return handlers.onDayHover(day); }, value: getDate(day), filledClassname: filledClassname }));
             }))); })))));
 };
-var Month$1 = withStyles(styles$1)(Month);
+var Month$1 = withStyles$1(styles$1)(Month);
 
 var isSameRange = function (first, second) {
     var fStart = first.startDate, fEnd = first.endDate;
@@ -3547,14 +3551,14 @@ var styles$2 = function (theme) {
     });
 };
 var Menu = function (props) {
-    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation;
+    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation, filledClassname = props.filledClassname;
     var translationText = __assign({
         startDate: "Start Date",
         endDate: "End Date"
     }, translation);
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     var canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
-    var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers };
+    var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers, filledClassname: filledClassname };
     return (React__default.createElement(Paper, { elevation: 5, square: true },
         React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
             React__default.createElement(Grid, null,
@@ -3628,7 +3632,7 @@ var getValidatedMonths = function (range, minDate, maxDate) {
 };
 var DateRangePickerImpl = function (props) {
     var today = new Date();
-    var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
+    var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, filledClassname = props.filledClassname, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
     var minDateValid = parseOptionalDate(minDate, addYears(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];
@@ -3706,7 +3710,7 @@ var DateRangePickerImpl = function (props) {
         onDayHover: onDayHover,
         onMonthNavigate: onMonthNavigate
     };
-    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation })) : null;
+    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, filledClassname: filledClassname, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation })) : null;
 };
 var DateRangePicker = DateRangePickerImpl;
 

@@ -57,7 +57,8 @@ interface MenuProps extends WithStyles<typeof styles> {
     months?: [string, string, string, string, string, string, string, string, string, string, string, string];
     weekDays?: [string, string, string, string, string, string, string];
     locale?: object;
-  }
+  },
+  filledClassname?: string
 }
 
 const Menu: React.FunctionComponent<MenuProps> = props => {
@@ -75,6 +76,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     helpers,
     handlers,
     translation,
+    filledClassname
   } = props;
   const translationText = {
     ...{
@@ -86,7 +88,7 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
 
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
-  const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
+  const commonProps = { dateRange, minDate, maxDate, helpers, handlers, filledClassname };
   return (
     <Paper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
