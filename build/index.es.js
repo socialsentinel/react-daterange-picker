@@ -3562,7 +3562,6 @@ var Menu = function (props) {
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     var canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
     var commonProps = { dateRange: dateRange, minDate: minDate, maxDate: maxDate, helpers: helpers, handlers: handlers };
-    console.log(commonProps);
     return (React__default.createElement(Paper, { elevation: 5, square: true },
         React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
             React__default.createElement(Grid, null,
