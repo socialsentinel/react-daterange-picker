@@ -35,6 +35,7 @@ interface DateRangePickerProps {
 	minDate?: Date | string;
 	maxDate?: Date | string;
 	onChange: (dateRange: DateRange) => void;
+	onSelectsChange: (isValid: boolean) => void;
 	translation?: React.ComponentPropsWithoutRef<typeof Menu>['translation'];
 }
 
@@ -44,6 +45,7 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 	const {
 		open,
 		onChange,
+		onSelectsChange,
 		initialDateRange,
 		minDate,
 		maxDate,
@@ -71,15 +73,19 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 
 	// handlers
 	const setFirstMonthValidated = (date: Date) => {
-		if (isBefore(date, secondMonth)) {
+		let isValid = isBefore(date, secondMonth);
+		if (isValid) {
 			setFirstMonth(date);
 		}
+		onSelectsChange(isValid);
 	};
 
 	const setSecondMonthValidated = (date: Date) => {
-		if (isAfter(date, firstMonth)) {
+		let isValid = isAfter(date, firstMonth);
+		if (isValid) {
 			setSecondMonth(date);
 		}
+		onSelectsChange(isValid);
 	};
 
 	const setDateRangeValidated = (range: DateRange) => {

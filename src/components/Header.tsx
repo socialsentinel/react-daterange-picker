@@ -9,7 +9,6 @@ import React from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import { setMonth, getMonth, setYear, getYear } from "date-fns";
-//import { MARKERS } from "../markers";
 
 interface HeaderProps extends WithStyles<typeof styles> {
 	date: Date;
@@ -18,7 +17,6 @@ interface HeaderProps extends WithStyles<typeof styles> {
 	prevDisabled: boolean;
 	onClickNext: () => void;
 	onClickPrevious: () => void;
-	marker: symbol;
 	months?: [string, string, string, string, string, string, string, string, string, string, string, string];
 	minDate?: Date;
 	maxDate?: Date;
@@ -56,9 +54,8 @@ const MONTHS = [
 	"Dec"
 ];
 
-const generateYears = (relativeTo: Date, count: number, marker: symbol, minDate?: Date, maxDate?: Date) => {
+const generateYears = (relativeTo: Date, count: number, minDate?: Date, maxDate?: Date) => {
 	if (minDate && maxDate) {
-		console.log(marker);
 		return [minDate.getFullYear(), maxDate.getFullYear()];
 	} else {
 		const half = Math.floor(count / 2);
@@ -80,8 +77,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 	onClickPrevious,
 	months = MONTHS,
 	minDate,
-	maxDate,
-	marker
+	maxDate
 }) => {
 	const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setDate(setMonth(date, parseInt(event.target.value)));
@@ -121,7 +117,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 					onChange={handleYearChange}
 					className={classes.input}
 					MenuProps={{ disablePortal: true }}>
-					{generateYears(date, 30, marker, minDate, maxDate).map(year => (
+					{generateYears(date, 30, minDate, maxDate).map(year => (
 						<MenuItem key={year} value={year}>
 							{year}
 						</MenuItem>

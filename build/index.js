@@ -3403,9 +3403,8 @@ var MONTHS = [
     "Nov",
     "Dec"
 ];
-var generateYears = function (relativeTo, count, marker, minDate, maxDate) {
+var generateYears = function (relativeTo, count, minDate, maxDate) {
     if (minDate && maxDate) {
-        console.log(marker);
         return [minDate.getFullYear(), maxDate.getFullYear()];
     }
     else {
@@ -3418,7 +3417,7 @@ var generateYears = function (relativeTo, count, marker, minDate, maxDate) {
     }
 };
 var Header = function (_a) {
-    var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b, minDate = _a.minDate, maxDate = _a.maxDate, marker = _a.marker;
+    var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b, minDate = _a.minDate, maxDate = _a.maxDate;
     var handleMonthChange = function (event) {
         setDate(setMonth(date, parseInt(event.target.value)));
     };
@@ -3432,7 +3431,7 @@ var Header = function (_a) {
         React__default.createElement(core.Grid, { item: true },
             React__default.createElement(core.Select, { value: getMonth(date), onChange: handleMonthChange, className: classes.input, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
         React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 30, marker, minDate, maxDate).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
+            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 30, minDate, maxDate).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
         React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(core.IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
                 React__default.createElement(ChevronRight, { color: nextDisabled ? "disabled" : "action" })))));
@@ -3515,7 +3514,7 @@ var Month = function (props) {
         React.createElement(core.Grid, { container: true },
             React.createElement(Header$1, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () {
                     return handlers.onMonthNavigate(marker, NavigationAction.Previous);
-                }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); }, months: months, marker: marker, minDate: minDate, maxDate: maxDate }),
+                }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); }, months: months, minDate: minDate, maxDate: maxDate }),
             React.createElement(core.Grid, { item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, weekDays.map(function (day) { return (React.createElement(core.Typography, { color: "textSecondary", key: day, variant: "caption" }, day)); })),
             React.createElement(core.Grid, { item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, chunks(getDaysInMonth$1(date), 7).map(function (week, idx) { return (React.createElement(core.Grid, { key: idx, container: true, direction: "row", justify: "center" }, week.map(function (day) {
                 var isStart = isStartOfRange(dateRange, day);
@@ -3650,7 +3649,7 @@ var getValidatedMonths = function (range, minDate, maxDate) {
 };
 var DateRangePickerImpl = function (props) {
     var today = new Date();
-    var open = props.open, onChange = props.onChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
+    var open = props.open, onChange = props.onChange, onSelectsChange = props.onSelectsChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
     var minDateValid = parseOptionalDate(minDate, addYears(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];
@@ -3662,14 +3661,18 @@ var DateRangePickerImpl = function (props) {
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     // handlers
     var setFirstMonthValidated = function (date) {
-        if (isBefore(date, secondMonth)) {
+        var isValid = isBefore(date, secondMonth);
+        if (isValid) {
             setFirstMonth(date);
         }
+        onSelectsChange(isValid);
     };
     var setSecondMonthValidated = function (date) {
-        if (isAfter(date, firstMonth)) {
+        var isValid = isAfter(date, firstMonth);
+        if (isValid) {
             setSecondMonth(date);
         }
+        onSelectsChange(isValid);
     };
     var setDateRangeValidated = function (range) {
         var newStart = range.startDate, newEnd = range.endDate;
