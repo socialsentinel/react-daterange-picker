@@ -9,7 +9,7 @@ import React from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import { setMonth, getMonth, setYear, getYear } from "date-fns";
-import { MARKERS } from "../markers";
+//import { MARKERS } from "../markers";
 
 interface HeaderProps extends WithStyles<typeof styles> {
 	date: Date;
@@ -58,10 +58,8 @@ const MONTHS = [
 
 const generateYears = (relativeTo: Date, count: number, marker: symbol, minDate?: Date, maxDate?: Date) => {
 	if (minDate && maxDate) {
-		console.log(marker, minDate.getFullYear(), maxDate.getFullYear());
-		let years = [];
-		years.push(marker == MARKERS.FIRST_MONTH ? minDate.getFullYear() : maxDate.getFullYear());
-		return years;
+		console.log(marker);
+		return [minDate.getFullYear(), maxDate.getFullYear()];
 	} else {
 		const half = Math.floor(count / 2);
 		return Array(count)

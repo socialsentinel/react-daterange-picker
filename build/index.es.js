@@ -3366,11 +3366,6 @@ var parseOptionalDate = function (date, defaultValue) {
     return defaultValue;
 };
 
-var MARKERS = {
-    FIRST_MONTH: Symbol("firstMonth"),
-    SECOND_MONTH: Symbol("secondMonth")
-};
-
 var styles = createStyles({
     iconContainer: {
         padding: 5
@@ -3403,10 +3398,8 @@ var MONTHS = [
 ];
 var generateYears = function (relativeTo, count, marker, minDate, maxDate) {
     if (minDate && maxDate) {
-        console.log(marker, minDate.getFullYear(), maxDate.getFullYear());
-        var years = [];
-        years.push(marker == MARKERS.FIRST_MONTH ? minDate.getFullYear() : maxDate.getFullYear());
-        return years;
+        console.log(marker);
+        return [minDate.getFullYear(), maxDate.getFullYear()];
     }
     else {
         var half_1 = Math.floor(count / 2);
@@ -3546,6 +3539,11 @@ var DefinedRanges = function (props) {
                         : "normal"
                 }
             } }, range.label))); })));
+};
+
+var MARKERS = {
+    FIRST_MONTH: Symbol("firstMonth"),
+    SECOND_MONTH: Symbol("secondMonth")
 };
 
 var styles$2 = function (theme) {
