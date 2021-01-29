@@ -90,6 +90,8 @@ const Month: React.FunctionComponent<MonthProps> = props => {
 					}
 					onClickNext={() => handlers.onMonthNavigate(marker, NavigationAction.Next)}
 					months={months}
+					minDate={minDate}
+					maxDate={maxDate}
 				/>
 
 				<Grid

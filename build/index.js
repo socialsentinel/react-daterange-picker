@@ -3410,13 +3410,14 @@ var generateYears = function (relativeTo, count) {
         .map(function (_, i) { return relativeTo.getFullYear() - half + i; }); // TODO: make part of the state
 };
 var Header = function (_a) {
-    var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b;
+    var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b, minDate = _a.minDate, maxDate = _a.maxDate;
     var handleMonthChange = function (event) {
         setDate(setMonth(date, parseInt(event.target.value)));
     };
     var handleYearChange = function (event) {
         setDate(setYear(date, parseInt(event.target.value)));
     };
+    console.log(minDate, maxDate);
     return (React__default.createElement(core.Grid, { container: true, justify: "space-between", alignItems: "center" },
         React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(core.IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
@@ -3424,7 +3425,7 @@ var Header = function (_a) {
         React__default.createElement(core.Grid, { item: true },
             React__default.createElement(core.Select, { value: getMonth(date), onChange: handleMonthChange, className: classes.input, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(core.MenuItem, { key: month, value: idx }, month)); }))),
         React__default.createElement(core.Grid, { item: true },
-            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 30).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
+            React__default.createElement(core.Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 1).map(function (year) { return (React__default.createElement(core.MenuItem, { key: year, value: year }, year)); }))),
         React__default.createElement(core.Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(core.IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
                 React__default.createElement(ChevronRight, { color: nextDisabled ? "disabled" : "action" })))));
@@ -3507,7 +3508,7 @@ var Month = function (props) {
         React.createElement(core.Grid, { container: true },
             React.createElement(Header$1, { date: date, setDate: setDate, nextDisabled: !forward, prevDisabled: !back, onClickPrevious: function () {
                     return handlers.onMonthNavigate(marker, NavigationAction.Previous);
-                }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); }, months: months }),
+                }, onClickNext: function () { return handlers.onMonthNavigate(marker, NavigationAction.Next); }, months: months, minDate: minDate, maxDate: maxDate }),
             React.createElement(core.Grid, { item: true, container: true, direction: "row", justify: "space-between", className: classes.weekDaysContainer }, weekDays.map(function (day) { return (React.createElement(core.Typography, { color: "textSecondary", key: day, variant: "caption" }, day)); })),
             React.createElement(core.Grid, { item: true, container: true, direction: "column", justify: "space-between", className: classes.daysContainer }, chunks(getDaysInMonth$1(date), 7).map(function (week, idx) { return (React.createElement(core.Grid, { key: idx, container: true, direction: "row", justify: "center" }, week.map(function (day) {
                 var isStart = isStartOfRange(dateRange, day);

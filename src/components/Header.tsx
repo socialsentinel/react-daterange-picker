@@ -18,6 +18,8 @@ interface HeaderProps extends WithStyles<typeof styles> {
 	onClickNext: () => void;
 	onClickPrevious: () => void;
 	months?: [string, string, string, string, string, string, string, string, string, string, string, string];
+	minDate?: Date;
+	maxDate?: Date;
 }
 
 const styles = createStyles({
@@ -68,6 +70,8 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 	onClickNext,
 	onClickPrevious,
 	months = MONTHS,
+	minDate,
+	maxDate
 }) => {
 	const handleMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setDate(setMonth(date, parseInt(event.target.value)));
@@ -76,7 +80,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 	const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setDate(setYear(date, parseInt(event.target.value)));
 	};
-
+console.log(minDate, maxDate);
 	return (
 		<Grid container justify="space-between" alignItems="center">
 			<Grid item className={classes.iconContainer}>
@@ -107,7 +111,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 					onChange={handleYearChange}
 					className={classes.input}
 					MenuProps={{ disablePortal: true }}>
-					{generateYears(date, 30).map(year => (
+					{generateYears(date, 1).map(year => (
 						<MenuItem key={year} value={year}>
 							{year}
 						</MenuItem>
