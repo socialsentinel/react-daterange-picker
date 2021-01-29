@@ -8,7 +8,7 @@ import { WithStyles, createStyles, withStyles } from '@material-ui/core/styles'
 import React from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import { setMonth, getMonth, setYear, getYear } from "date-fns";
+import { setMonth, getMonth, setYear, getYear/*, isWithinInterval*/ } from "date-fns";
 
 interface HeaderProps extends WithStyles<typeof styles> {
 	date: Date;
@@ -54,11 +54,17 @@ const MONTHS = [
 	"Dec"
 ];
 
-const generateYears = (relativeTo: Date, count: number) => {
+const generateYears = (relativeTo: Date, count: number, minDate?: Date, maxDate?: Date) => {
+console.log(minDate, maxDate);
 	const half = Math.floor(count / 2);
+console.log(half);
 	return Array(count)
 		.fill(0)
-		.map((_, i) => relativeTo.getFullYear() - half + i); // TODO: make part of the state
+		.map((_, i) => {
+console.log(relativeTo.getFullYear(), half, i);
+//console.log(isWithinInterval(relativeTo, { start: minDate, end: maxDate }))
+			return relativeTo.getFullYear() - half + i;
+		}); // TODO: make part of the state
 };
 
 const Header: React.FunctionComponent<HeaderProps> = ({
@@ -80,7 +86,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
 	const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		setDate(setYear(date, parseInt(event.target.value)));
 	};
-console.log(minDate, maxDate);
+
 	return (
 		<Grid container justify="space-between" alignItems="center">
 			<Grid item className={classes.iconContainer}>
@@ -111,7 +117,7 @@ console.log(minDate, maxDate);
 					onChange={handleYearChange}
 					className={classes.input}
 					MenuProps={{ disablePortal: true }}>
-					{generateYears(date, 1).map(year => (
+					{generateYears(date, 30, minDate, maxDate).map(year => (
 						<MenuItem key={year} value={year}>
 							{year}
 						</MenuItem>

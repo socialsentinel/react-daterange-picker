@@ -3396,11 +3396,17 @@ var MONTHS = [
     "Nov",
     "Dec"
 ];
-var generateYears = function (relativeTo, count) {
+var generateYears = function (relativeTo, count, minDate, maxDate) {
+    console.log(minDate, maxDate);
     var half = Math.floor(count / 2);
+    console.log(half);
     return Array(count)
         .fill(0)
-        .map(function (_, i) { return relativeTo.getFullYear() - half + i; }); // TODO: make part of the state
+        .map(function (_, i) {
+        console.log(relativeTo.getFullYear(), half, i);
+        //console.log(isWithinInterval(relativeTo, { start: minDate, end: maxDate }))
+        return relativeTo.getFullYear() - half + i;
+    }); // TODO: make part of the state
 };
 var Header = function (_a) {
     var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b, minDate = _a.minDate, maxDate = _a.maxDate;
@@ -3410,7 +3416,6 @@ var Header = function (_a) {
     var handleYearChange = function (event) {
         setDate(setYear(date, parseInt(event.target.value)));
     };
-    console.log(minDate, maxDate);
     return (React__default.createElement(Grid, { container: true, justify: "space-between", alignItems: "center" },
         React__default.createElement(Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(IconButton, { className: classes.icon, disabled: prevDisabled, onClick: onClickPrevious },
@@ -3418,7 +3423,7 @@ var Header = function (_a) {
         React__default.createElement(Grid, { item: true },
             React__default.createElement(Select, { value: getMonth(date), onChange: handleMonthChange, className: classes.input, MenuProps: { disablePortal: true } }, months.map(function (month, idx) { return (React__default.createElement(MenuItem, { key: month, value: idx }, month)); }))),
         React__default.createElement(Grid, { item: true },
-            React__default.createElement(Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 1).map(function (year) { return (React__default.createElement(MenuItem, { key: year, value: year }, year)); }))),
+            React__default.createElement(Select, { value: getYear(date), onChange: handleYearChange, className: classes.input, MenuProps: { disablePortal: true } }, generateYears(date, 30, minDate, maxDate).map(function (year) { return (React__default.createElement(MenuItem, { key: year, value: year }, year)); }))),
         React__default.createElement(Grid, { item: true, className: classes.iconContainer },
             React__default.createElement(IconButton, { className: classes.icon, disabled: nextDisabled, onClick: onClickNext },
                 React__default.createElement(ChevronRight, { color: nextDisabled ? "disabled" : "action" })))));
