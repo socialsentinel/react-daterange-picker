@@ -3397,16 +3397,18 @@ var MONTHS = [
     "Dec"
 ];
 var generateYears = function (relativeTo, count, minDate, maxDate) {
-    console.log(minDate, maxDate);
-    var half = Math.floor(count / 2);
-    console.log(half);
-    return Array(count)
-        .fill(0)
-        .map(function (_, i) {
-        console.log(relativeTo.getFullYear(), half, i);
-        //console.log(isWithinInterval(relativeTo, { start: minDate, end: maxDate }))
-        return relativeTo.getFullYear() - half + i;
-    }); // TODO: make part of the state
+    if (minDate && maxDate) {
+        console.log(minDate.getFullYear(), maxDate.getFullYear());
+        return [minDate.getFullYear(), maxDate.getFullYear()];
+    }
+    else {
+        var half_1 = Math.floor(count / 2);
+        return Array(count)
+            .fill(0)
+            .map(function (_, i) {
+            return relativeTo.getFullYear() - half_1 + i;
+        }); // TODO: make part of the state
+    }
 };
 var Header = function (_a) {
     var date = _a.date, classes = _a.classes, setDate = _a.setDate, nextDisabled = _a.nextDisabled, prevDisabled = _a.prevDisabled, onClickNext = _a.onClickNext, onClickPrevious = _a.onClickPrevious, _b = _a.months, months = _b === void 0 ? MONTHS : _b, minDate = _a.minDate, maxDate = _a.maxDate;

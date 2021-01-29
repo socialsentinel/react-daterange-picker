@@ -8,7 +8,7 @@ import { WithStyles, createStyles, withStyles } from '@material-ui/core/styles'
 import React from "react";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import { setMonth, getMonth, setYear, getYear/*, isWithinInterval*/ } from "date-fns";
+import { setMonth, getMonth, setYear, getYear } from "date-fns";
 
 interface HeaderProps extends WithStyles<typeof styles> {
 	date: Date;
@@ -55,16 +55,17 @@ const MONTHS = [
 ];
 
 const generateYears = (relativeTo: Date, count: number, minDate?: Date, maxDate?: Date) => {
-console.log(minDate, maxDate);
-	const half = Math.floor(count / 2);
-console.log(half);
-	return Array(count)
-		.fill(0)
-		.map((_, i) => {
-console.log(relativeTo.getFullYear(), half, i);
-//console.log(isWithinInterval(relativeTo, { start: minDate, end: maxDate }))
-			return relativeTo.getFullYear() - half + i;
-		}); // TODO: make part of the state
+	if (minDate && maxDate) {
+		console.log(minDate.getFullYear(), maxDate.getFullYear());
+		return [minDate.getFullYear(), maxDate.getFullYear()];
+	} else {
+		const half = Math.floor(count / 2);
+		return Array(count)
+			.fill(0)
+			.map((_, i) => {
+				return relativeTo.getFullYear() - half + i;
+			}); // TODO: make part of the state
+	}
 };
 
 const Header: React.FunctionComponent<HeaderProps> = ({
