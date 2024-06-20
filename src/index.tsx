@@ -37,8 +37,6 @@ interface DateRangePickerProps {
 	onChange: (dateRange: DateRange) => void;
 	onSelectsChange: (isValid: boolean) => void;
 	translation?: React.ComponentPropsWithoutRef<typeof Menu>['translation'];
-	showHeader?: boolean;
-	handleClose?: () => void;
 }
 
 const DateRangePickerImpl = (props: DateRangePickerProps) => {
@@ -53,8 +51,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		maxDate,
 		definedRanges = defaultRanges,
 		translation,
-		showHeader,
-		handleClose
 	} = props;
 
 	const minDateValid = parseOptionalDate(minDate, addYears(today, -10));
@@ -72,7 +68,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 	const [secondMonth, setSecondMonth] = React.useState<Date>(
 		initialSecondMonth || addMonths(firstMonth, 1)
 	);
-	const [monthsAndYearsValid, setMonthsAndYearsValid] = React.useState(true);
 
 	const { startDate, endDate } = dateRange;
 
@@ -82,7 +77,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		if (isValid) {
 			setFirstMonth(date);
 		}
-		setMonthsAndYearsValid(isValid);
 		onSelectsChange(isValid);
 	};
 
@@ -91,7 +85,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		if (isValid) {
 			setSecondMonth(date);
 		}
-		setMonthsAndYearsValid(isValid);
 		onSelectsChange(isValid);
 	};
 
@@ -155,12 +148,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 		onMonthNavigate
 	};
 
-	const closeButtonHandler = () => {
-		if (handleClose) {
-			handleClose();
-		}
-	}
-
 	return open ? (
 		<Menu
 			dateRange={dateRange}
@@ -175,10 +162,6 @@ const DateRangePickerImpl = (props: DateRangePickerProps) => {
 			helpers={helpers}
 			handlers={handlers}
 			translation={translation}
-			showHeader={showHeader}
-			closeButtonHandler={closeButtonHandler}
-			showError={monthsAndYearsValid}
-			errorMessage={'The start month must be before the end month'}
 		/>
 	) : null;
 };

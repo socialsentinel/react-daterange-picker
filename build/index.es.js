@@ -1,5 +1,5 @@
 import React__default, { createElement, useState } from 'react';
-import { Grid, IconButton, Select, MenuItem, Typography, withStyles as withStyles$1, createStyles as createStyles$1, Paper, makeStyles as makeStyles$1, List, ListItem, ListItemText, Divider, Button } from '@material-ui/core';
+import { Grid, IconButton, Select, MenuItem, Typography, withStyles as withStyles$1, createStyles as createStyles$1, Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
 import { createStyles, withStyles, makeStyles } from '@material-ui/core/styles';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
@@ -3451,14 +3451,14 @@ var useStyles = makeStyles(function (theme) {
             lineHeight: 1.6
         },
         outlined: {
-            border: "1px solid " + theme.palette.primary.main
+            border: "1px solid " + theme.palette.secondary.main
         },
         filled: {
             "&:hover": {
-                backgroundColor: theme.palette.primary.main
+                backgroundColor: theme.palette.secondary.main
             },
-            backgroundColor: theme.palette.primary.main,
-            border: "1px solid " + theme.palette.primary.main
+            backgroundColor: theme.palette.secondary.main,
+            border: "1px solid " + theme.palette.secondary.main
         },
         highlighted: {
             backgroundColor: theme.palette.action.hover
@@ -3520,17 +3520,6 @@ var Month = function (props) {
 };
 var Month$1 = withStyles$1(styles$1)(Month);
 
-var styles$2 = makeStyles$1({
-    list: {
-        paddingLeft: 16,
-        paddingRight: 16
-    },
-    listItem: {
-        margin: 0,
-        width: 140,
-        borderRadius: 6
-    }
-});
 var isSameRange = function (first, second) {
     var fStart = first.startDate, fEnd = first.endDate;
     var sStart = second.startDate, sEnd = second.endDate;
@@ -3540,12 +3529,9 @@ var isSameRange = function (first, second) {
     return false;
 };
 var DefinedRanges = function (props) {
-    var classes = styles$2();
-    console.log('classes', classes);
-    return (React__default.createElement(List, { className: classes.list }, props.ranges.map(function (range, idx) { return (React__default.createElement(ListItem, { button: true, key: idx, onClick: function () { return props.setRange(range); }, className: classes.listItem },
+    return (React__default.createElement(List, null, props.ranges.map(function (range, idx) { return (React__default.createElement(ListItem, { button: true, key: idx, onClick: function () { return props.setRange(range); } },
         React__default.createElement(ListItemText, { primaryTypographyProps: {
                 variant: "body2",
-                color: "textSecondary",
                 style: {
                     fontWeight: isSameRange(range, props.selectedRange)
                         ? "bold"
@@ -3559,7 +3545,7 @@ var MARKERS = {
     SECOND_MONTH: Symbol("secondMonth")
 };
 
-var styles$3 = function (theme) {
+var styles$2 = function (theme) {
     return createStyles({
         header: {
             padding: "20px 70px"
@@ -3569,24 +3555,13 @@ var styles$3 = function (theme) {
             textAlign: "center"
         },
         divider: {
-            borderLeft: '1px solid #E4E7E7'
-        },
-        monthContainer: {
-            borderBottom: '1px solid #E4E7E7'
-        },
-        footerGrid: {
-            backgroundColor: theme.palette.common.white
-        },
-        actionButton: {
-            margin: theme.spacing(1)
-        },
-        errorMsg: {
-            paddingLeft: theme.spacing(2)
+            borderLeft: "1px solid " + theme.palette.action.hover,
+            marginBottom: 20
         }
     });
 };
 var Menu = function (props) {
-    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation, showHeader = props.showHeader, closeButtonHandler = props.closeButtonHandler, errorMessage = props.errorMessage, showError = props.showError;
+    var classes = props.classes, ranges = props.ranges, dateRange = props.dateRange, minDate = props.minDate, maxDate = props.maxDate, firstMonth = props.firstMonth, setFirstMonth = props.setFirstMonth, secondMonth = props.secondMonth, setSecondMonth = props.setSecondMonth, setDateRange = props.setDateRange, helpers = props.helpers, handlers = props.handlers, translation = props.translation;
     var translationText = __assign({
         startDate: "Start Date",
         endDate: "End Date"
@@ -3597,30 +3572,23 @@ var Menu = function (props) {
     return (React__default.createElement(Paper, { elevation: 5, square: true },
         React__default.createElement(Grid, { container: true, direction: "row", wrap: "nowrap" },
             React__default.createElement(Grid, null,
-                React__default.createElement(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange })),
-            React__default.createElement("div", { className: classes.divider }),
-            React__default.createElement(Grid, null,
-                showHeader ?
-                    React__default.createElement(React__default.Fragment, null,
-                        React__default.createElement(Grid, { container: true, className: classes.header, alignItems: "center" },
-                            React__default.createElement(Grid, { item: true, className: classes.headerItem },
-                                React__default.createElement(Typography, { variant: "subtitle1" }, startDate ? format(startDate, "MMMM dd, yyyy", { locale: translation === null || translation === void 0 ? void 0 : translation.locale }) : translationText === null || translationText === void 0 ? void 0 : translationText.startDate)),
-                            React__default.createElement(Grid, { item: true, className: classes.headerItem },
-                                React__default.createElement(ArrowRightAlt, { color: "action" })),
-                            React__default.createElement(Grid, { item: true, className: classes.headerItem },
-                                React__default.createElement(Typography, { variant: "subtitle1" }, endDate ? format(endDate, "MMMM dd, yyyy", { locale: translation === null || translation === void 0 ? void 0 : translation.locale }) : translationText === null || translationText === void 0 ? void 0 : translationText.endDate))),
-                        React__default.createElement(Divider, null))
-                    : null,
-                React__default.createElement(Grid, { container: true, direction: "row", justify: "center", wrap: "nowrap", className: classes.monthContainer },
+                React__default.createElement(Grid, { container: true, className: classes.header, alignItems: "center" },
+                    React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                        React__default.createElement(Typography, { variant: "subtitle1" }, startDate ? format(startDate, "MMMM dd, yyyy", { locale: translation === null || translation === void 0 ? void 0 : translation.locale }) : translationText === null || translationText === void 0 ? void 0 : translationText.startDate)),
+                    React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                        React__default.createElement(ArrowRightAlt, { color: "action" })),
+                    React__default.createElement(Grid, { item: true, className: classes.headerItem },
+                        React__default.createElement(Typography, { variant: "subtitle1" }, endDate ? format(endDate, "MMMM dd, yyyy", { locale: translation === null || translation === void 0 ? void 0 : translation.locale }) : translationText === null || translationText === void 0 ? void 0 : translationText.endDate))),
+                React__default.createElement(Divider, null),
+                React__default.createElement(Grid, { container: true, direction: "row", justify: "center", wrap: "nowrap" },
                     React__default.createElement(Month$1, __assign({}, commonProps, { value: firstMonth, setValue: setFirstMonth, navState: [true, canNavigateCloser], marker: MARKERS.FIRST_MONTH, weekDays: translationText === null || translationText === void 0 ? void 0 : translationText.weekDays, months: translationText === null || translationText === void 0 ? void 0 : translationText.months })),
                     React__default.createElement("div", { className: classes.divider }),
-                    React__default.createElement(Month$1, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH, weekDays: translationText === null || translationText === void 0 ? void 0 : translationText.weekDays, months: translationText === null || translationText === void 0 ? void 0 : translationText.months }))),
-                React__default.createElement(Grid, { container: true, justify: "space-between", alignItems: "center", className: classes.footerGrid },
-                    React__default.createElement(Grid, { item: true, className: classes.errorMsg }, !showError ? React__default.createElement(Typography, { color: "error" }, errorMessage) : null),
-                    React__default.createElement(Grid, { item: true },
-                        React__default.createElement(Button, { "aria-label": "update", color: "primary", onClick: closeButtonHandler, className: classes.actionButton }, "Done")))))));
+                    React__default.createElement(Month$1, __assign({}, commonProps, { value: secondMonth, setValue: setSecondMonth, navState: [canNavigateCloser, true], marker: MARKERS.SECOND_MONTH, weekDays: translationText === null || translationText === void 0 ? void 0 : translationText.weekDays, months: translationText === null || translationText === void 0 ? void 0 : translationText.months })))),
+            React__default.createElement("div", { className: classes.divider }),
+            React__default.createElement(Grid, null,
+                React__default.createElement(DefinedRanges, { selectedRange: dateRange, ranges: ranges, setRange: setDateRange })))));
 };
-var Menu$1 = withStyles(styles$3)(Menu);
+var Menu$1 = withStyles(styles$2)(Menu);
 
 var getDefaultRanges = function (date) { return [
     {
@@ -3674,7 +3642,7 @@ var getValidatedMonths = function (range, minDate, maxDate) {
 };
 var DateRangePickerImpl = function (props) {
     var today = new Date();
-    var open = props.open, onChange = props.onChange, onSelectsChange = props.onSelectsChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation, showHeader = props.showHeader, handleClose = props.handleClose;
+    var open = props.open, onChange = props.onChange, onSelectsChange = props.onSelectsChange, initialDateRange = props.initialDateRange, minDate = props.minDate, maxDate = props.maxDate, _a = props.definedRanges, definedRanges = _a === void 0 ? defaultRanges : _a, translation = props.translation;
     var minDateValid = parseOptionalDate(minDate, addYears(today, -10));
     var maxDateValid = parseOptionalDate(maxDate, addYears(today, 10));
     var _b = getValidatedMonths(initialDateRange || {}, minDateValid, maxDateValid), intialFirstMonth = _b[0], initialSecondMonth = _b[1];
@@ -3683,7 +3651,6 @@ var DateRangePickerImpl = function (props) {
     var _d = useState(), hoverDay = _d[0], setHoverDay = _d[1];
     var _e = useState(intialFirstMonth || today), firstMonth = _e[0], setFirstMonth = _e[1];
     var _f = useState(initialSecondMonth || addMonths(firstMonth, 1)), secondMonth = _f[0], setSecondMonth = _f[1];
-    var _g = useState(true), monthsAndYearsValid = _g[0], setMonthsAndYearsValid = _g[1];
     var startDate = dateRange.startDate, endDate = dateRange.endDate;
     // handlers
     var setFirstMonthValidated = function (date) {
@@ -3691,7 +3658,6 @@ var DateRangePickerImpl = function (props) {
         if (isValid) {
             setFirstMonth(date);
         }
-        setMonthsAndYearsValid(isValid);
         onSelectsChange(isValid);
     };
     var setSecondMonthValidated = function (date) {
@@ -3699,7 +3665,6 @@ var DateRangePickerImpl = function (props) {
         if (isValid) {
             setSecondMonth(date);
         }
-        setMonthsAndYearsValid(isValid);
         onSelectsChange(isValid);
     };
     var setDateRangeValidated = function (range) {
@@ -3759,12 +3724,7 @@ var DateRangePickerImpl = function (props) {
         onDayHover: onDayHover,
         onMonthNavigate: onMonthNavigate
     };
-    var closeButtonHandler = function () {
-        if (handleClose) {
-            handleClose();
-        }
-    };
-    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation, showHeader: showHeader, closeButtonHandler: closeButtonHandler, showError: monthsAndYearsValid, errorMessage: 'The start month must be before the end month' })) : null;
+    return open ? (createElement(Menu$1, { dateRange: dateRange, minDate: minDateValid, maxDate: maxDateValid, ranges: definedRanges, firstMonth: firstMonth, secondMonth: secondMonth, setFirstMonth: setFirstMonthValidated, setSecondMonth: setSecondMonthValidated, setDateRange: setDateRangeValidated, helpers: helpers, handlers: handlers, translation: translation })) : null;
 };
 var DateRangePicker = DateRangePickerImpl;
 

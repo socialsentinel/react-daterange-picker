@@ -1,5 +1,5 @@
 import React from "react";
-import { List, ListItem, ListItemText, makeStyles } from "@material-ui/core";
+import { List, ListItem, ListItemText } from "@material-ui/core";
 import { DefinedRange, DateRange } from "../types";
 import { isSameDay } from "date-fns";
 
@@ -8,19 +8,6 @@ type DefinedRangesProps = {
 	selectedRange: DateRange;
 	ranges: DefinedRange[];
 };
-
-const styles = makeStyles({
-	list: {
-		paddingLeft: 16,
-		paddingRight: 16
-	},
-
-	listItem: {
-		margin: 0,
-		width: 140,
-		borderRadius: 6
-	}
-});
 
 const isSameRange = (first: DateRange, second: DateRange) => {
 	const { startDate: fStart, endDate: fEnd } = first;
@@ -32,17 +19,13 @@ const isSameRange = (first: DateRange, second: DateRange) => {
 };
 
 const DefinedRanges: React.FunctionComponent<DefinedRangesProps> = props => {
-	let classes = styles();
-	console.log('classes', classes);
-
 	return (
-		<List className={classes.list}>
+		<List>
 			{props.ranges.map((range, idx) => (
-				<ListItem button key={idx} onClick={() => props.setRange(range)} className={classes.listItem}>
+				<ListItem button key={idx} onClick={() => props.setRange(range)}>
 					<ListItemText
 						primaryTypographyProps={{
 							variant: "body2",
-							color: "textSecondary",
 							style: {
 								fontWeight: isSameRange(range, props.selectedRange)
 									? "bold"

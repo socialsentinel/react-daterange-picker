@@ -1,7 +1,7 @@
 import React from "react";
 import { WithStyles, Theme } from '@material-ui/core/styles';
 import { DateRange, DefinedRange, Setter, NavigationAction } from "../types";
-declare const styles: (theme: Theme) => Record<"header" | "headerItem" | "divider" | "monthContainer" | "footerGrid" | "actionButton" | "errorMsg", import("@material-ui/styles").CSSProperties | import("@material-ui/styles").CreateCSSProperties<{}> | ((props: {}) => import("@material-ui/styles").CreateCSSProperties<{}>)>;
+declare const styles: (theme: Theme) => Record<"header" | "headerItem" | "divider", import("@material-ui/styles").CSSProperties | import("@material-ui/styles").CreateCSSProperties<{}> | ((props: {}) => import("@material-ui/styles").CreateCSSProperties<{}>)>;
 interface MenuProps extends WithStyles<typeof styles> {
     dateRange: DateRange;
     ranges: DefinedRange[];
@@ -27,10 +27,6 @@ interface MenuProps extends WithStyles<typeof styles> {
         weekDays?: [string, string, string, string, string, string, string];
         locale?: object;
     };
-    showHeader?: boolean;
-    closeButtonHandler?: () => void;
-    errorMessage?: string;
-    showError?: boolean;
 }
-declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MenuProps>, "dateRange" | "ranges" | "minDate" | "maxDate" | "firstMonth" | "secondMonth" | "setFirstMonth" | "setSecondMonth" | "setDateRange" | "helpers" | "handlers" | "translation" | "showHeader" | "closeButtonHandler" | "errorMessage" | "showError" | "children"> & import("@material-ui/core").StyledComponentProps<"header" | "headerItem" | "divider" | "monthContainer" | "footerGrid" | "actionButton" | "errorMsg">>;
+declare const _default: React.ComponentType<Pick<React.PropsWithChildren<MenuProps>, "dateRange" | "ranges" | "minDate" | "maxDate" | "firstMonth" | "secondMonth" | "setFirstMonth" | "setSecondMonth" | "setDateRange" | "helpers" | "handlers" | "translation" | "children"> & import("@material-ui/core").StyledComponentProps<"header" | "headerItem" | "divider">>;
 export default _default;
