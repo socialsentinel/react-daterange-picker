@@ -3,7 +3,8 @@ import {
   Paper,
   Grid,
   Typography,
-  Divider
+  Divider,
+  Button
 } from "@material-ui/core";
 import {
   createStyles,
@@ -28,10 +29,21 @@ const styles = (theme: Theme) =>
       textAlign: "center"
     },
     divider: {
-      borderLeft: `1px solid ${theme.palette.action.hover}`,
-      marginBottom: 20
+      borderLeft: '1px solid #E4E7E7'
+    },
+    monthContainer: {
+      borderBottom: '1px solid #E4E7E7'
+    },
+    footerGrid: {
+      backgroundColor: theme.palette.common.white
+    },
+    actionButton: {
+      margin: theme.spacing(1)
+    },
+    errorMsg: {
+      paddingLeft: theme.spacing(2)
     }
-  });
+});
 
 interface MenuProps extends WithStyles<typeof styles> {
   dateRange: DateRange;
@@ -57,7 +69,11 @@ interface MenuProps extends WithStyles<typeof styles> {
     months?: [string, string, string, string, string, string, string, string, string, string, string, string];
     weekDays?: [string, string, string, string, string, string, string];
     locale?: object;
-  }
+  };
+  showHeader?: boolean;
+  closeButtonHandler?: () => void;
+  errorMessage?: string;
+  showError?: boolean;
 }
 
 const Menu: React.FunctionComponent<MenuProps> = props => {
@@ -74,7 +90,11 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
     setDateRange,
     helpers,
     handlers,
-    translation
+    translation,
+    showHeader,
+    closeButtonHandler,
+    errorMessage,
+    showError
   } = props;
   const translationText = {
     ...{
@@ -87,27 +107,40 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
   const { startDate, endDate } = dateRange;
   const canNavigateCloser = differenceInCalendarMonths(secondMonth, firstMonth) >= 2;
   const commonProps = { dateRange, minDate, maxDate, helpers, handlers };
+
   return (
     <Paper elevation={5} square>
       <Grid container direction="row" wrap="nowrap">
         <Grid>
-          <Grid container className={classes.header} alignItems="center">
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {startDate ? format(startDate, "MMMM dd, yyyy", { locale: translation?.locale }) : translationText?.startDate as string}
-              </Typography>
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <ArrowRightAlt color="action" />
-            </Grid>
-            <Grid item className={classes.headerItem}>
-              <Typography variant="subtitle1">
-                {endDate ? format(endDate, "MMMM dd, yyyy", { locale: translation?.locale }) : translationText?.endDate as string}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Divider />
-          <Grid container direction="row" justify="center" wrap="nowrap">
+          <DefinedRanges
+            selectedRange={dateRange}
+            ranges={ranges}
+            setRange={setDateRange}
+          />
+        </Grid>
+        <div className={classes.divider} />
+        <Grid>
+          {showHeader ?
+            <React.Fragment>
+              <Grid container className={classes.header} alignItems="center">
+                <Grid item className={classes.headerItem}>
+                  <Typography variant="subtitle1">
+                    {startDate ? format(startDate, "MMMM dd, yyyy", { locale: translation?.locale }) : translationText?.startDate as string}
+                  </Typography>
+                </Grid>
+                <Grid item className={classes.headerItem}>
+                  <ArrowRightAlt color="action" />
+                </Grid>
+                <Grid item className={classes.headerItem}>
+                  <Typography variant="subtitle1">
+                    {endDate ? format(endDate, "MMMM dd, yyyy", { locale: translation?.locale }) : translationText?.endDate as string}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Divider />
+            </React.Fragment>
+          : null}
+          <Grid container direction="row" justify="center" wrap="nowrap" className={classes.monthContainer}>
             <Month
               {...commonProps}
               value={firstMonth}
@@ -128,14 +161,23 @@ const Menu: React.FunctionComponent<MenuProps> = props => {
               months={translationText?.months}
             />
           </Grid>
-        </Grid>
-        <div className={classes.divider} />
-        <Grid>
-          <DefinedRanges
-            selectedRange={dateRange}
-            ranges={ranges}
-            setRange={setDateRange}
-          />
+          <Grid container
+            justify="space-between"
+            alignItems="center"
+            className={classes.footerGrid}>
+            <Grid item className={classes.errorMsg}>
+              {!showError ? <Typography color="error">{errorMessage}</Typography> : null}
+            </Grid>
+            <Grid item>
+              <Button
+                  aria-label="update"
+                  color="primary"
+                  onClick={closeButtonHandler}
+                  className={classes.actionButton}>
+                  Done
+              </Button>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Paper>

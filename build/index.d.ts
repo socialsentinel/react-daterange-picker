@@ -10,6 +10,8 @@ interface DateRangePickerProps {
     onChange: (dateRange: DateRange) => void;
     onSelectsChange: (isValid: boolean) => void;
     translation?: React.ComponentPropsWithoutRef<typeof Menu>['translation'];
+    showHeader?: boolean;
+    handleClose?: () => void;
 }
 export { DateRange, DefinedRange } from "./types";
 export declare const DateRangePicker: (props: DateRangePickerProps) => JSX.Element | null;
