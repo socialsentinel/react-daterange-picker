@@ -35,14 +35,14 @@ const useStyles = makeStyles((theme: Theme) =>
       lineHeight: 1.6
     },
     outlined: {
-      border: `1px solid ${theme.palette.secondary.main}`
+      border: `1px solid ${theme.palette.primary.main}`
     },
     filled: {
       "&:hover": {
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.primary.main
       },
-      backgroundColor: theme.palette.secondary.main,
-      border: `1px solid ${theme.palette.secondary.main}`
+      backgroundColor: theme.palette.primary.main,
+      border: `1px solid ${theme.palette.primary.main}`
     },
     highlighted: {
       backgroundColor: theme.palette.action.hover
