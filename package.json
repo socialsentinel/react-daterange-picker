@@ -1,58 +1,90 @@
 {
-	"name": "@matharumanpreet00/react-daterange-picker",
-	"version": "1.0.5",
-	"description": "A react date range picker using Material Design",
-	"author": {
-		"email": "matharumanpreet00@gmail.com",
-		"name": "Manpreet Singh Matharu"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/matharumanpreet00/react-daterange-picker"
-	},
-	"main": "build/index.js",
-	"module": "build/index.es.js",
-	"jsnext:main": "build/index.es.js",
-	"scripts": {
-		"build": "rollup -c",
-		"storybook": "start-storybook"
-	},
-	"dependencies": {
-		"@material-ui/core": "^4.9.5",
-		"@material-ui/icons": "^4.5.1",
-		"date-fns": "^2.10.0"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.8.6",
-		"@storybook/react": "^5.3.14",
-		"awesome-typescript-loader": "^5.2.1",
-		"babel-loader": "^8.0.6",
-		"rollup": "^1.27.13",
-		"rollup-plugin-commonjs": "^10.1.0",
-		"rollup-plugin-node-resolve": "^5.2.0",
-		"rollup-plugin-peer-deps-external": "^2.2.0",
-		"rollup-plugin-typescript2": "^0.25.3",
-		"typescript": "^3.7.3"
-	},
-	"peerDependencies": {
-		"@material-ui/core": "^4.9.5",
-		"@material-ui/icons": "^4.5.1",
-		"react": "^16",
-		"react-dom": "^16"
-	},
-	"keywords": [
-		"react",
-		"component",
-		"react-components",
-		"date-range",
-		"date",
-		"range",
-		"picker",
-		"material-design",
-		"material",
-		"typescript",
-		"npm",
-		"package"
-	],
-	"license": "MIT"
+  "name": "@matharumanpreet00/react-daterange-picker",
+  "version": "1.0.5",
+  "description": "A react date range picker using Material Design",
+  "author": {
+    "email": "matharumanpreet00@gmail.com",
+    "name": "Manpreet Singh Matharu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matharumanpreet00/react-daterange-picker"
+  },
+  "main": "build/index.js",
+  "module": "build/index.es.js",
+  "jsnext:main": "build/index.es.js",
+  "scripts": {
+    "build": "rollup -c",
+    "storybook": "storybook dev"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.5.1",
+    "date-fns": "^2.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@storybook/addon-docs": "^9.1.5",
+    "@storybook/addon-links": "^9.1.5",
+    "@storybook/react": "^9.1.5",
+    "@storybook/react-webpack5": "^9.1.5",
+    "babel-loader": "^8.3.0",
+    "rollup": "^2.79.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.5.1",
+    "react": "^16",
+    "react-dom": "^16"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "react-components",
+    "date-range",
+    "date",
+    "range",
+    "picker",
+    "material-design",
+    "material",
+    "typescript",
+    "npm",
+    "package"
+  ],
+  "license": "MIT",
+  "overrides": {
+    "ansi-regex": "5.0.1",
+    "qs": "6.11.2",
+    "minimist": "1.2.8",
+    "y18n": "5.0.8",
+    "semver": "7.6.0",
+    "micromatch": "4.0.8",
+    "minimatch": "5.1.6",
+    "glob-parent": "6.0.2",
+    "css-what": "6.1.0",
+    "immer": "9.0.21",
+    "prismjs": "1.29.0",
+    "elliptic": "6.5.7",
+    "browserify-sign": "4.2.2",
+    "tar": "6.2.0",
+    "body-parser": "1.20.3",
+    "ejs": "3.1.10",
+    "json5": "2.2.3",
+    "loader-utils": "2.0.4",
+    "webpack-dev-middleware": "7.1.0",
+    "decode-uri-component": "0.2.2",
+    "ip": "1.1.9",
+    "ini": "1.3.8",
+    "merge-deep": "3.0.3",
+    "shell-quote": "1.8.1",
+    "cross-spawn": "7.0.5",
+    "path-to-regexp": "0.1.10",
+    "webpack": "5.94.0"
+  }
 }
