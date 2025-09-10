@@ -1,4 +1,15 @@
+// .storybook/main.js
 module.exports = {
-	stories: ['../src/**/*.stories.tsx'],
-	// addons: ['@storybook/preset-typescript'],
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {}
+  },
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+  addons: [
+    "@storybook/addon-docs",
+    "@storybook/addon-links"
+  ],
+  docs: {
+    autodocs: true
+  }
 };
